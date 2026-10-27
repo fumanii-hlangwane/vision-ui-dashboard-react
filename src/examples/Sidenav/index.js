@@ -1,18 +1,18 @@
 /*!
 
 =========================================================
-* Vision UI Free React - v1.0.0
+- Vision UI Free React - v1.0.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
+- Product Page: https://www.creative-tim.com/product/vision-ui-free-react
+- Copyright 2021 Creative Tim (https://www.creative-tim.com/)
+- Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
 
-* Design and Coded by Simmmple & Creative Tim
+- Design and Coded by Simmmple & Creative Tim
 
 =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+- The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
 
@@ -33,11 +33,9 @@ import Icon from "@mui/material/Icon";
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
-import VuiButton from "components/VuiButton";
 
 // Vision UI Dashboard React example components
 import SidenavCollapse from "examples/Sidenav/SidenavCollapse";
-import SidenavCard from "examples/Sidenav/SidenavCard";
 
 // Custom styles for the Sidenav
 import SidenavRoot from "examples/Sidenav/SidenavRoot";
@@ -49,7 +47,6 @@ import { useVisionUIController, setMiniSidenav, setTransparentSidenav } from "co
 // Vision UI Dashboard React icons
 import SimmmpleLogo from "examples/Icons/SimmmpleLogo";
 
-// function Sidenav({ color, brand, brandName, routes, ...rest }) {
 function Sidenav({ color, brandName, routes, ...rest }) {
   const [controller, dispatch] = useVisionUIController();
   const { miniSidenav, transparentSidenav } = controller;
@@ -209,37 +206,6 @@ function Sidenav({ color, brandName, routes, ...rest }) {
       </VuiBox>
       <Divider light />
       <List>{renderRoutes}</List>
-      <VuiBox
-        my={2}
-        mx={2}
-        mt="auto"
-        sx={({ breakpoints }) => ({
-          [breakpoints.up("xl")]: {
-            pt: 2,
-          },
-          [breakpoints.only("xl")]: {
-            pt: 1,
-          },
-          [breakpoints.down("xl")]: {
-            pt: 2,
-          },
-        })}
-      >
-        <SidenavCard color={color} />
-        <VuiBox mt={2}>
-          <VuiButton
-            component="a"
-            href="https://creative-tim.com/product/vision-ui-dashboard-pro-react"
-            target="_blank"
-            rel="noreferrer"
-            variant="gradient"
-            color={color}
-            fullWidth
-          >
-            Upgrade to PRO
-          </VuiButton>
-        </VuiBox>
-      </VuiBox>
     </SidenavRoot>
   );
 }
@@ -247,13 +213,11 @@ function Sidenav({ color, brandName, routes, ...rest }) {
 // Setting default values for the props of Sidenav
 Sidenav.defaultProps = {
   color: "info",
-  // brand: "",
 };
 
 // Typechecking props for the Sidenav
 Sidenav.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
-  // brand: PropTypes.string,
   brandName: PropTypes.string.isRequired,
   routes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
