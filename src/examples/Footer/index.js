@@ -1,5 +1,5 @@
 import VUIBox from "components/VUIBox";
-import VUITypography from "components/VUITypography";
+import VuiTypography from "components/VuiTypography";
 
 function Footer() {
   return (
@@ -20,9 +20,9 @@ function Footer() {
         fontSize="sm"
         px={1.5}
       >
-        <VUITypography variant="button" color="white" fontWeight="regular">
+        <VuiTypography variant="button" color="white" fontWeight="regular">
           Executive Analytics Engine &bull; Architected by Fumani Hlangwane
-        </VUITypography>
+        </VuiTypography>
       </VUIBox>
     </VUIBox>
   );
