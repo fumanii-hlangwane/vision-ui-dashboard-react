@@ -1,9 +1,9 @@
-import VUIBox from "components/VUIBox";
+import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 
 function Footer() {
   return (
-    <VUIBox
+    <VuiBox
       width="100%"
       display="flex"
       flexDirection={{ xs: "column", lg: "row" }}
@@ -11,7 +11,7 @@ function Footer() {
       alignItems="center"
       px={1.5}
     >
-      <VUIBox
+      <VuiBox
         display="flex"
         justifyContent="center"
         alignItems="center"
@@ -23,8 +23,8 @@ function Footer() {
         <VuiTypography variant="button" color="white" fontWeight="regular">
           Executive Analytics Engine &bull; Architected by Fumani Hlangwane
         </VuiTypography>
-      </VUIBox>
-    </VUIBox>
+      </VuiBox>
+    </VuiBox>
   );
 }
 
