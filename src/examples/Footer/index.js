@@ -1,31 +1,42 @@
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
+/*!
 
-function Footer() {
+=========================================================
+- Vision UI Free Chakra - v1.0.0
+=========================================================
+
+- Product Page: https://www.creative-tim.com/product/vision-ui-free-chakra
+- Copyright 2021 Creative Tim (https://www.creative-tim.com/)
+- Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-chakra/blob/master LICENSE.md)
+
+- Design and Coded by Simmmple & Creative Tim
+
+=========================================================
+
+- The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+
+/*eslint-disable*/
+import React from "react";
+import { Flex, Text } from "@chakra-ui/react";
+
+export default function Footer(props) {
   return (
-    <VuiBox
-      width="100%"
-      display="flex"
-      flexDirection={{ xs: "column", lg: "row" }}
-      justifyContent="space-between"
+    <Flex
+      flexDirection={{
+        base: "column",
+        xl: "row",
+      }}
       alignItems="center"
-      px={1.5}
-    >
-      <VuiBox
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        flexWrap="wrap"
-        color="white"
+      justifyContent="center"
+      px="30px"
+      pb="20px">
+      <Text
         fontSize="sm"
-        px={1.5}
-      >
-        <VuiTypography variant="button" color="white" fontWeight="regular">
-          Executive Analytics Engine &bull; Architected by Fumani Hlangwane
-        </VuiTypography>
-      </VuiBox>
-    </VuiBox>
+        color="white"
+        textAlign="center">
+        Executive Analytics Engine &bull; Architected by Fumani Hlangwane
+      </Text>
+    </Flex>
   );
 }
-
-export default Footer;
