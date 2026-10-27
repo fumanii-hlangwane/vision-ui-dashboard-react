@@ -44,10 +44,7 @@ import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
 // Vision UI Dashboard React context
 import { useVisionUIController, setMiniSidenav, setTransparentSidenav } from "context";
 
-// Vision UI Dashboard React icons
-import SimmmpleLogo from "examples/Icons/SimmmpleLogo";
-
-function Sidenav({ color, brandName, routes, ...rest }) {
+function Sidenav({ color, routes, ...rest }) {
   const [controller, dispatch] = useVisionUIController();
   const { miniSidenav, transparentSidenav } = controller;
   const location = useLocation();
@@ -172,24 +169,13 @@ function Sidenav({ color, brandName, routes, ...rest }) {
               })
             }
           >
-            <VuiBox
-              display="flex"
-              sx={
-                ((theme) => sidenavLogoLabel(theme, { miniSidenav, transparentSidenav }),
-                {
-                  mr: miniSidenav || (miniSidenav && transparentSidenav) ? 0 : 1,
-                })
-              }
-            >
-              <SimmmpleLogo size="24px" />
-            </VuiBox>
             <VuiTypography
               variant="button"
               textGradient={true}
               color="logo"
               fontSize={14}
               letterSpacing={2}
-              fontWeight="medium"
+              fontWeight="bold"
               sx={
                 ((theme) => sidenavLogoLabel(theme, { miniSidenav, transparentSidenav }),
                 {
@@ -199,7 +185,7 @@ function Sidenav({ color, brandName, routes, ...rest }) {
                 })
               }
             >
-              {brandName}
+              EXECUTIVE ENGINE
             </VuiTypography>
           </VuiBox>
         </VuiBox>
@@ -218,7 +204,6 @@ Sidenav.defaultProps = {
 // Typechecking props for the Sidenav
 Sidenav.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
-  brandName: PropTypes.string.isRequired,
   routes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
