@@ -1,12 +1,12 @@
 /*!
 
 =========================================================
-- Vision UI Free Chakra - v1.0.0
+- Vision UI Free React - v1.0.0
 =========================================================
 
-- Product Page: https://www.creative-tim.com/product/vision-ui-free-chakra
+- Product Page: https://www.creative-tim.com/product/vision-ui-free-react
 - Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-- Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-chakra/blob/master LICENSE.md)
+- Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
 
 - Design and Coded by Simmmple & Creative Tim
 
@@ -16,494 +16,183 @@
 
 */
 
-/*eslint-disable*/
-import { HamburgerIcon } from "@chakra-ui/icons";
-// chakra imports
-import {
-  Box,
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerOverlay,
-  Flex,
-  Link,
-  Stack,
-  Text,
-  useDisclosure,
-  Icon,
-} from "@chakra-ui/react";
-import IconBox from "components/Icons/IconBox";
-import { Separator } from "components/Separator/Separator";
+import { useEffect } from "react";
+
+// react-router-dom components
+import { useLocation, NavLink } from "react-router-dom";
+
+// prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
-import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
 
-// FUNCTIONS
+// @mui material components
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import Link from "@mui/material/Link";
+import Icon from "@mui/material/Icon";
 
-function Sidebar(props) {
-  // to check for active links and opened collapses
-  let location = useLocation();
-  // this is for the rest of the collapses
-  const [state, setState] = React.useState({});
-  const mainPanel = React.useRef();
-  let variantChange = "0.2s linear";
-  // verifies if routeName is the one active (in browser input)
-  const activeRoute = (routeName) => {
-    return location.pathname === routeName ? "active" : "";
-  };
-  // this function creates the links and collapses that appear in the sidebar (left menu)
-  const createLinks = (routes) => {
-    const { sidebarVariant } = props;
-    // Chakra Color Mode
-    let activeBg = "#1A1F37";
-    let inactiveBg = "#1A1F37";
-    let activeColor = "white";
-    let inactiveColor = "white";
-    let sidebarActiveShadow = "none";
+// Vision UI Dashboard React components
+import VuiBox from "components/VuiBox";
+import VuiTypography from "components/VuiTypography";
 
-    return routes.map((prop, key) => {
-      if (prop.redirect) {
-        return null;
-      }
-      if (prop.category) {
-        var st = {};
-        st[prop["state"]] = !state[prop.state];
-        return (
-          <React.Fragment key={key}>
-            <Text
-              color={activeColor}
-              fontWeight='bold'
-              mb={{
-                xl: "12px",
-              }}
-              mx='auto'
-              ps={{
-                sm: "10px",
-                xl: "16px",
-              }}
-              py='12px'>
-              {document.documentElement.dir === "rtl"
-                ? prop.rtlName
-                : prop.name}
-            </Text>
-            {createLinks(prop.views)}
-          </React.Fragment>
-        );
-      }
-      return (
-        <NavLink to={prop.layout + prop.path} key={key}>
-          {activeRoute(prop.layout + prop.path) === "active" ? (
-            <Button
-              boxSize='initial'
-              justifyContent='flex-start'
-              alignItems='center'
-              boxShadow={sidebarActiveShadow}
-              bg={activeBg}
-              transition={variantChange}
-              backdropFilter='blur(42px)'
-              mb={{
-                xl: "12px",
-              }}
-              mx={{
-                xl: "auto",
-              }}
-              ps={{
-                sm: "10px",
-                xl: "16px",
-              }}
-              py='12px'
-              borderRadius='15px'
-              _hover='none'
-              w='100%'
-              _active={{
-                bg: "inherit",
-                transform: "none",
-                borderColor: "transparent",
-              }}
-              _focus={{
-                boxShadow: "0px 7px 11px rgba(0, 0, 0, 0.04)",
-              }}>
-              <Flex>
-                {typeof prop.icon === "string" ? (
-                  <Icon>{prop.icon}</Icon>
-                ) : (
-                  <IconBox
-                    bg='brand.200'
-                    color='white'
-                    h='30px'
-                    w='30px'
-                    me='12px'
-                    transition={variantChange}>
-                    {prop.icon}
-                  </IconBox>
-                )}
-                <Text color={activeColor} my='auto' fontSize='sm'>
-                  {document.documentElement.dir === "rtl"
-                    ? prop.rtlName
-                    : prop.name}
-                </Text>
-              </Flex>
-            </Button>
-          ) : (
-            <Button
-              boxSize='initial'
-              justifyContent='flex-start'
-              alignItems='center'
-              bg='transparent'
-              mb={{
-                xl: "12px",
-              }}
-              mx={{
-                xl: "auto",
-              }}
-              py='12px'
-              ps={{
-                sm: "10px",
-                xl: "16px",
-              }}
-              borderRadius='15px'
-              _hover='none'
-              w='100%'
-              _active={{
-                bg: "inherit",
-                transform: "none",
-                borderColor: "transparent",
-              }}
-              _focus={{
-                boxShadow: "none",
-              }}>
-              <Flex>
-                {typeof prop.icon === "string" ? (
-                  <Icon>{prop.icon}</Icon>
-                ) : (
-                  <IconBox
-                    bg={inactiveBg}
-                    color='brand.200'
-                    h='30px'
-                    w='30px'
-                    me='12px'
-                    transition={variantChange}>
-                    {prop.icon}
-                  </IconBox>
-                )}
-                <Text color={inactiveColor} my='auto' fontSize='sm'>
-                  {document.documentElement.dir === "rtl"
-                    ? prop.rtlName
-                    : prop.name}
-                </Text>
-              </Flex>
-            </Button>
-          )}
-        </NavLink>
-      );
-    });
-  };
-  const { routes, sidebarVariant } = props;
+// Vision UI Dashboard React example components
+import SidenavCollapse from "examples/Sidenav/SidenavCollapse";
 
-  var links = <>{createLinks(routes)}</>;
-  //  BRAND
-  let sidebarBg =
-    "linear-gradient(111.84deg, rgba(6, 11, 38, 0.94) 59.3%, rgba(26, 31, 55, 0) 100%)";
-  let sidebarRadius = "16px";
-  let sidebarMargins = "16px 0px 16px 16px";
-  var brand = (
-    <Box pt={"25px"} mb='12px'>
-      <Link
-        href={`${process.env.PUBLIC_URL}/#/`}
-        target='_blank'
-        display='flex'
-        lineHeight='100%'
-        mb='30px'
-        fontWeight='bold'
-        justifyContent='center'
-        alignItems='center'
-        fontSize='11px'>
-        <Box
-          bg='linear-gradient(97.89deg, #FFFFFF 70.67%, rgba(117, 122, 140, 0) 108.55%)'
-          bgClip='text'>
-          <Text fontSize='sm' letterSpacing='3px' mt='3px' color='transparent' fontWeight='bold'>
-            EXECUTIVE ENGINE
-          </Text>
-        </Box>
-      </Link>
-      <Separator></Separator>
-    </Box>
-  );
+// Custom styles for the Sidenav
+import SidenavRoot from "examples/Sidenav/SidenavRoot";
+import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
 
-  // SIDEBAR
-  return (
-    <Box ref={mainPanel}>
-      <Box display={{ sm: "none", xl: "block" }} position='fixed'>
-        <Box
-          bg={sidebarBg}
-          backdropFilter='blur(10px)'
-          transition={variantChange}
-          w='260px'
-          maxW='260px'
-          ms={{
-            sm: "16px",
-          }}
-          my={{
-            sm: "16px",
-          }}
-          h='calc(100vh - 32px)'
-          ps='20px'
-          pe='20px'
-          m={sidebarMargins}
-          borderRadius={sidebarRadius}>
-          <Box>{brand}</Box>
-          <Stack direction='column' mb='40px'>
-            <Box>{links}</Box>
-          </Stack>
-        </Box>
-      </Box>
-    </Box>
-  );
-}
+// Vision UI Dashboard React context
+import { useVisionUIController, setMiniSidenav, setTransparentSidenav } from "context";
 
-// FUNCTIONS
+function Sidenav({ color, routes, ...rest }) {
+  const [controller, dispatch] = useVisionUIController();
+  const { miniSidenav, transparentSidenav } = controller;
+  const location = useLocation();
+  const { pathname } = location;
+  const collapseName = pathname.split("/").slice(1)[0];
 
-export function SidebarResponsive(props) {
-  // to check for active links and opened collapses
-  let location = useLocation();
-  // this is for the rest of the collapses
-  const [state, setState] = React.useState({});
-  const mainPanel = React.useRef();
-  // verifies if routeName is the one active (in browser input)
-  const activeRoute = (routeName) => {
-    return location.pathname === routeName ? "active" : "";
-  };
-  // this function creates the links and collapses that appear in the sidebar (left menu)
-  const createLinks = (routes) => {
-    // Chakra Color Mode
-    const activeBg = "#1A1F37";
-    const inactiveBg = "#1A1F37";
-    const activeColor = "white";
-    const inactiveColor = "white";
+  const closeSidenav = () => setMiniSidenav(dispatch, true);
 
-    return routes.map((prop, key) => {
-      if (prop.redirect) {
-        return null;
-      }
-      if (prop.category) {
-        var st = {};
-        st[prop["state"]] = !state[prop.state];
-        return (
-          <React.Fragment key={key}>
-            <Text
-              color={activeColor}
-              fontWeight='bold'
-              mb={{
-                xl: "12px",
-              }}
-              mx='auto'
-              ps={{
-                sm: "10px",
-                xl: "16px",
-              }}
-              py='12px'>
-              {document.documentElement.dir === "rtl"
-                ? prop.rtlName
-                : prop.name}
-            </Text>
-            {createLinks(prop.views)}
-          </React.Fragment>
-        );
-      }
-      return (
-        <NavLink to={prop.layout + prop.path} key={key}>
-          {activeRoute(prop.layout + prop.path) === "active" ? (
-            <Button
-              boxSize='initial'
-              justifyContent='flex-start'
-              alignItems='center'
-              bg={activeBg}
-              mb={{
-                xl: "12px",
-              }}
-              mx={{
-                xl: "auto",
-              }}
-              ps={{
-                sm: "10px",
-                xl: "16px",
-              }}
-              py='12px'
-              borderRadius='15px'
-              _hover='none'
-              w='100%'
-              _active={{
-                bg: "inherit",
-                transform: "none",
-                borderColor: "transparent",
-              }}
-              _focus={{
-                boxShadow: "none",
-              }}>
-              <Flex>
-                {typeof prop.icon === "string" ? (
-                  <Icon>{prop.icon}</Icon>
-                ) : (
-                  <IconBox
-                    bg='brand.200'
-                    color='white'
-                    h='30px'
-                    w='30px'
-                    me='12px'>
-                    {prop.icon}
-                  </IconBox>
-                )}
-                <Text color={activeColor} my='auto' fontSize='sm'>
-                  {document.documentElement.dir === "rtl"
-                    ? prop.rtlName
-                    : prop.name}
-                </Text>
-              </Flex>
-            </Button>
-          ) : (
-            <Button
-              boxSize='initial'
-              justifyContent='flex-start'
-              alignItems='center'
-              bg='transparent'
-              mb={{
-                xl: "12px",
-              }}
-              mx={{
-                xl: "auto",
-              }}
-              py='12px'
-              ps={{
-                sm: "10px",
-                xl: "16px",
-              }}
-              borderRadius='15px'
-              _hover='none'
-              w='100%'
-              _active={{
-                bg: "inherit",
-                transform: "none",
-                borderColor: "transparent",
-              }}
-              _focus={{
-                boxShadow: "none",
-              }}>
-              <Flex>
-                {typeof prop.icon === "string" ? (
-                  <Icon>{prop.icon}</Icon>
-                ) : (
-                  <IconBox
-                    bg={inactiveBg}
-                    color='brand.200'
-                    h='30px'
-                    w='30px'
-                    me='12px'>
-                    {prop.icon}
-                  </IconBox>
-                )}
-                <Text color={inactiveColor} my='auto' fontSize='sm'>
-                  {document.documentElement.dir === "rtl"
-                    ? prop.rtlName
-                    : prop.name}
-                </Text>
-              </Flex>
-            </Button>
-          )}
-        </NavLink>
-      );
-    });
-  };
-  const { routes, iconColor, ...rest } = props;
+  useEffect(() => {
+    function handleMiniSidenav() {
+      setMiniSidenav(dispatch, window.innerWidth < 1200);
+    }
+    window.addEventListener("resize", handleMiniSidenav);
+    handleMiniSidenav();
+    return () => window.removeEventListener("resize", handleMiniSidenav);
+  }, [dispatch, location]);
 
-  var links = <>{createLinks(routes)}</>;
-  //  BRAND
-  var brand = (
-    <Box pt={"35px"} mb='8px'>
-      <Link
-        href={`${process.env.PUBLIC_URL}/#/`}
-        target='_blank'
-        display='flex'
-        lineHeight='100%'
-        mb='30px'
-        fontWeight='bold'
-        justifyContent='center'
-        alignItems='center'
-        fontSize='11px'>
-        <Box
-          bg='linear-gradient(97.89deg, #FFFFFF 70.67%, rgba(117, 122, 140, 0) 108.55%)'
-          bgClip='text'>
-          <Text fontSize='sm' letterSpacing='3px' mt='3px' color='transparent' fontWeight='bold'>
-            EXECUTIVE ENGINE
-          </Text>
-        </Box>
-      </Link>
-      <Separator></Separator>
-    </Box>
-  );
+  useEffect(() => {
+    if (window.innerWidth < 1440) {
+      setTransparentSidenav(dispatch, false);
+    }
+  }, []);
 
-  // SIDEBAR
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef();
-  // Color variables
-  return (
-    <Flex
-      display={{ sm: "flex", xl: "none" }}
-      ref={mainPanel}
-      alignItems='center'>
-      <HamburgerIcon
-        color={iconColor}
-        w='18px'
-        h='18px'
-        ref={btnRef}
-        colorScheme='teal'
-        onClick={onOpen}
-      />
-      <Drawer
-        isOpen={isOpen}
-        onClose={onClose}
-        placement={document.documentElement.dir === "rtl" ? "right" : "left"}
-        finalFocusRef={btnRef}>
-        <DrawerOverlay />
-        <DrawerContent
-          backdropFilter='blur(10px)'
-          bg='linear-gradient(111.84deg, rgba(6, 11, 38, 0.94) 59.3%, rgba(26, 31, 55, 0) 100%); '
-          w='250px'
-          maxW='250px'
-          ms={{
-            sm: "16px",
-          }}
-          my={{
-            sm: "16px",
-          }}
-          borderRadius='16px'>
-          <DrawerCloseButton
-            color='white'
-            _focus={{ boxShadow: "none" }}
-            _hover={{ boxShadow: "none" }}
+  const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, route, href }) => {
+    let returnValue;
+
+    if (type === "collapse") {
+      returnValue = href ? (
+        <Link
+          href={href}
+          key={key}
+          target="_blank"
+          rel="noreferrer"
+          sx={{ textDecoration: "none" }}
+        >
+          <SidenavCollapse
+            color={color}
+            name={name}
+            icon={icon}
+            active={key === collapseName}
+            noCollapse={noCollapse}
           />
-          <DrawerBody maxW='250px' px='1rem'>
-            <Box maxW='100%' h='100vh'>
-              <Box>{brand}</Box>
-              <Stack direction='column' mb='40px'>
-                <Box>{links}</Box>
-              </Stack>
-            </Box>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
-    </Flex>
+        </Link>
+      ) : (
+        <NavLink to={route} key={key}>
+          <SidenavCollapse
+            color={color}
+            key={key}
+            name={name}
+            icon={icon}
+            active={key === collapseName}
+            noCollapse={noCollapse}
+          />
+        </NavLink>
+      );
+    } else if (type === "title") {
+      returnValue = (
+        <VuiTypography
+          key={key}
+          color="white"
+          display="block"
+          variant="caption"
+          fontWeight="bold"
+          textTransform="uppercase"
+          pl={3}
+          mt={2}
+          mb={1}
+          ml={1}
+        >
+          {title}
+        </VuiTypography>
+      );
+    } else if (type === "divider") {
+      returnValue = <Divider light key={key} />;
+    }
+
+    return returnValue;
+  });
+
+  return (
+    <SidenavRoot {...rest} variant="permanent" ownerState={{ transparentSidenav, miniSidenav }}>
+      <VuiBox
+        pt={3.5}
+        pb={0.5}
+        px={4}
+        textAlign="center"
+        sx={{
+          overflow: "unset !important",
+        }}
+      >
+        <VuiBox
+          display={{ xs: "block", xl: "none" }}
+          position="absolute"
+          top={0}
+          right={0}
+          p={1.625}
+          onClick={closeSidenav}
+          sx={{ cursor: "pointer" }}
+        >
+          <VuiTypography variant="h6" color="text">
+            <Icon sx={{ fontWeight: "bold" }}>close</Icon>
+          </VuiTypography>
+        </VuiBox>
+        <VuiBox component={NavLink} to="/" display="flex" alignItems="center">
+          <VuiBox
+            sx={
+              ((theme) => sidenavLogoLabel(theme, { miniSidenav }),
+              {
+                display: "flex",
+                alignItems: "center",
+                margin: "0 auto",
+              })
+            }
+          >
+            <VuiTypography
+              variant="button"
+              textGradient={true}
+              color="logo"
+              fontSize={14}
+              letterSpacing={2}
+              fontWeight="bold"
+              sx={
+                ((theme) => sidenavLogoLabel(theme, { miniSidenav, transparentSidenav }),
+                {
+                  opacity: miniSidenav || (miniSidenav && transparentSidenav) ? 0 : 1,
+                  maxWidth: miniSidenav || (miniSidenav && transparentSidenav) ? 0 : "100%",
+                  margin: "0 auto",
+                })
+              }
+            >
+              EXECUTIVE ENGINE
+            </VuiTypography>
+          </VuiBox>
+        </VuiBox>
+      </VuiBox>
+      <Divider light />
+      <List>{renderRoutes}</List>
+    </SidenavRoot>
   );
 }
-// PROPS
 
-Sidebar.propTypes = {
-  routes: PropTypes.arrayOf(PropTypes.object),
-  variant: PropTypes.string,
-};
-SidebarResponsive.propTypes = {
-  routes: PropTypes.arrayOf(PropTypes.object),
+Sidenav.defaultProps = {
+  color: "info",
 };
 
-export default Sidebar;
+Sidenav.propTypes = {
+  color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
+  routes: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+export default Sidenav;
