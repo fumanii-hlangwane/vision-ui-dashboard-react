@@ -1,62 +1,28 @@
-import React from "react";
+import { useMemo } from "react";
 
-import { Card, Icon } from "@mui/material";
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
+// Array of professional tech/analytics background images
+const techImages = [
+  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80"
+];
 
-import gif from "assets/images/cardimgfree.png";
+function WelcomeMark() {
+  // Selects a random stock image once when the component mounts
+  const randomBgImage = useMemo(() => {
+    return techImages[Math.floor(Math.random() * techImages.length)];
+  }, []);
 
-const WelcomeMark = () => {
   return (
-    <Card sx={() => ({
-      height: "340px",
-      py: "32px",
-      backgroundImage: `url(${gif})`,
-      backgroundSize: "cover",
-      backgroundPosition: "50%"
-    })}>
-      <VuiBox height="100%" display="flex" flexDirection="column" justifyContent="space-between">
-        <VuiBox>
-          <VuiTypography color="text" variant="button" fontWeight="regular" mb="12px">
-            Welcome back,
-          </VuiTypography>
-          <VuiTypography color="white" variant="h3" fontWeight="bold" mb="18px">
-            Mark Johnson
-          </VuiTypography>
-          <VuiTypography color="text" variant="h6" fontWeight="regular" mb="auto">
-            Glad to see you again!
-            <br /> Ask me anything.
-          </VuiTypography>
-        </VuiBox>
-        <VuiTypography
-          component="a"
-          href="#"
-          variant="button"
-          color="white"
-          fontWeight="regular"
-          sx={{
-            mr: "5px",
-            display: "inline-flex",
-            alignItems: "center",
-            cursor: "pointer",
-
-            "& .material-icons-round": {
-              fontSize: "1.125rem",
-              transform: `translate(2px, -0.5px)`,
-              transition: "transform 0.2s cubic-bezier(0.34,1.61,0.7,1.3)",
-            },
-
-            "&:hover .material-icons-round, &:focus  .material-icons-round": {
-              transform: `translate(6px, -0.5px)`,
-            },
-          }}
-        >
-          Tap to record
-          <Icon sx={{ fontWeight: "bold", ml: "5px" }}>arrow_forward</Icon>
-        </VuiTypography>
-      </VuiBox>
-    </Card>
+    <VuiBox
+       sx={{
+         backgroundImage: `url(${randomBgImage})`,
+         backgroundSize: "cover",
+         backgroundPosition: "center",
+         // add your card styling here
+       }}
+    >
+      {/* Your card content */}
+    </VuiBox>
   );
-};
-
-export default WelcomeMark;
+}
