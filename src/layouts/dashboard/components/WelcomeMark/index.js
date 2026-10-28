@@ -25,4 +25,5 @@ function WelcomeMark() {
       {/* Your card content */}
     </VuiBox>
   );
+  export default WelcomeMark;
 }
