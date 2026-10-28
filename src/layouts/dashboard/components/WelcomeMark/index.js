@@ -2,16 +2,13 @@ import Card from "@mui/material/Card";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 
-// Absolute import starting directly from src/assets
-import cardBgImage from "assets/images/cardBgImage.png";
-
 function WelcomeMark() {
   return (
     <Card
       sx={{
-        backgroundImage: `url(${cardBgImage})`,
+        backgroundImage: `url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=1200&q=80')`,
         backgroundSize: "cover",
-        backgroundPosition: "50%",
+        backgroundPosition: "center",
         minHeight: "290px",
         display: "flex",
         flexDirection: "column",
