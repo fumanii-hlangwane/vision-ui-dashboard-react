@@ -7,11 +7,11 @@ import Card from "@mui/material/Card";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 
-// Array of clean, dark-themed abstract data flow and tech background images
+// Array of your selected Unsplash dark abstract backgrounds
 const techImages = [
-  "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=1200&q=80",
-  "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80"
+  "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=1200&q=80"
 ];
 
 function WelcomeMark() {
@@ -22,7 +22,7 @@ function WelcomeMark() {
   return (
     <Card
       sx={{
-        backgroundImage: `linear-gradient(135deg, rgba(6, 11, 38, 0.9) 0%, rgba(26, 31, 55, 0.8) 100%), url(${randomBgImage})`,
+        backgroundImage: `linear-gradient(135deg, rgba(6, 11, 38, 0.92) 0%, rgba(26, 31, 55, 0.85) 100%), url(${randomBgImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         minHeight: "290px",
