@@ -2,8 +2,8 @@ import Card from "@mui/material/Card";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 
-// Step up 4 levels to src/assets/images/cardBgImage.png
-import cardBgImage from "../../../../assets/images/cardBgImage.png";
+// Absolute import starting directly from src/assets
+import cardBgImage from "assets/images/cardBgImage.png";
 
 function WelcomeMark() {
   return (
