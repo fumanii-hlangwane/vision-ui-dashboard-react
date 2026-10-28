@@ -1,5 +1,13 @@
 import { useMemo } from "react";
 
+// @mui material components
+import Card from "@mui/material/Card";
+import Icon from "@mui/material/Icon";
+
+// Vision UI Dashboard React components
+import VuiBox from "components/VuiBox";
+import VuiTypography from "components/VuiTypography";
+
 // Array of professional tech/analytics background images
 const techImages = [
   "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
@@ -8,22 +16,37 @@ const techImages = [
 ];
 
 function WelcomeMark() {
-  // Selects a random stock image once when the component mounts
   const randomBgImage = useMemo(() => {
     return techImages[Math.floor(Math.random() * techImages.length)];
   }, []);
 
   return (
-    <VuiBox
-       sx={{
-         backgroundImage: `url(${randomBgImage})`,
-         backgroundSize: "cover",
-         backgroundPosition: "center",
-         // add your card styling here
-       }}
+    <Card
+      sx={{
+        backgroundImage: `url(${randomBgImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "290px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        p: "28px",
+        position: "relative",
+      }}
     >
-      {/* Your card content */}
-    </VuiBox>
+      <VuiBox>
+        <VuiTypography color="text" variant="caption" fontWeight="bold" textTransform="uppercase">
+          Welcome back,
+        </VuiTypography>
+        <VuiTypography color="white" variant="h3" fontWeight="bold" mb="10px">
+          Fumani Hlangwane
+        </VuiTypography>
+        <VuiTypography color="text" variant="body2" fontWeight="regular" maxW="400px">
+          Glad to see you back. Your custom executive analytics engines are live and scaling smoothly.
+        </VuiTypography>
+      </VuiBox>
+    </Card>
   );
-  export default WelcomeMark;
 }
+
+export default WelcomeMark;
