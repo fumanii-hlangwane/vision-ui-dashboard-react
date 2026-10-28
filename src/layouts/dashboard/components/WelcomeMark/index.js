@@ -2,8 +2,8 @@ import Card from "@mui/material/Card";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 
-// Import original template welcome background asset
-import cardBgImage from "assets/images/cardBgImage.png";
+// Step up to src/assets/images/cardBgImage.png
+import cardBgImage from "../../../assets/images/cardBgImage.png";
 
 function WelcomeMark() {
   return (
